@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nebula Store - Modern E-Commerce</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #1e90ff 0%, #007bff 100%);
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(30, 144, 255, 0.2);
+    }
+    .product-card {
+      transition: all 0.3s ease;
+    }
+    .btn-primary {
+      background-color: #1e90ff;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #007bff;
+    }
+    .text-primary {
+      color: #1e90ff;
+    }
+    .border-primary {
+      border-color: #1e90ff;
+    }
+    .bg-primary {
+      background-color: #1e90ff;
+    }
+    .swiper-slide {
+      width: auto !important;
+    }
+    .placeholder-img {
+      background-color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-store text-2xl text-primary"></i>
+        <h1 class="text-xl font-bold text-gray-800">Nebula Store</h1>
+      </div>
+      
+      
+      <div class="flex items-center space-x-4">
+        <button class="p-2 text-gray-600 hover:text-primary">
+          <i class="fas fa-search"></i>
+        </button>
+        <button class="p-2 text-gray-600 hover:text-primary">
+          <i class="fas fa-heart"></i>
+        </button>
+        <button class="p-2 text-gray-600 hover:text-primary relative">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+        </button>
+        <button class="hidden md:block bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600">
+          Login
+        </button>
+        <button class="md:hidden text-gray-600" id="mobile-menu-button">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="md:hidden hidden bg-white shadow-lg" id="mobile-menu">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+        <button class="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full">
+          Login
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-gradient text-white py-16 md:py-24">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-8 md:mb-0">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Summer Collection 2023</h2>
+        <p class="text-lg mb-6 opacity-90">Discover our latest products with exclusive discounts up to 50% off</p>
+        <button class="bg-white text-primary px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition">
+          Shop Now
+        </button>
+      </div>
+      <div class="md:w-1/2 flex justify-center">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+             alt="Summer Collection" 
+             class="rounded-lg shadow-xl max-w-full h-auto max-h-80 object-cover">
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Products -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">Popular Products</h2>
+        <a href="#" class="text-primary hover:underline">View All</a>
+      </div>
+      
+      <div class="swiper-container">
+        <div class="swiper-wrapper" id="popular-products">
+          <!-- Products will be loaded here by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Products -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold text-gray-800">All Products</h2>
+        <div class="flex space-x-2">
+          <select class="border border-gray-300 rounded-md px-3 py-2 text-sm">
+            <option>Sort by</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Newest</option>
+            <option>Popular</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="all-products">
+        <!-- Products will be loaded here by JavaScript -->
+      </div>
+      
+      <div class="mt-10 flex justify-center">
+        <button class="bg-white border border-primary text-primary px-6 py-2 rounded-md hover:bg-primary hover:text-white transition">
+          Load More
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="flex flex-col items-center text-center">
+          <div class="bg-blue-100 p-4 rounded-full mb-4">
+            <i class="fas fa-truck text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Free Shipping</h3>
+          <p class="text-gray-600">Free shipping on all orders over $50</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="bg-blue-100 p-4 rounded-full mb-4">
+            <i class="fas fa-undo text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Easy Returns</h3>
+          <p class="text-gray-600">30-day return policy for all products</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <div class="bg-blue-100 p-4 rounded-full mb-4">
+            <i class="fas fa-headset text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">24/7 Support</h3>
+          <p class="text-gray-600">Dedicated support for all customers</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="py-12 bg-gray-100">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-2xl font-bold mb-4">Subscribe to Our Newsletter</h2>
+      <p class="text-gray-600 mb-6 max-w-2xl mx-auto">Get the latest updates on new products and upcoming sales</p>
+      <div class="flex flex-col sm:flex-row justify-center max-w-md mx-auto">
+        <input type="email" placeholder="Your email address" class="px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent mb-2 sm:mb-0 sm:mr-2 flex-grow">
+        <button class="bg-primary text-white px-6 py-3 rounded-md font-medium hover:bg-blue-600 transition">
+          Subscribe
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4 flex items-center">
+            <i class="fas fa-store mr-2"></i> Nebula Store
+          </h3>
+          <p class="text-gray-400 mb-4">Your one-stop shop for all your needs. Quality products at affordable prices.</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+           
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Customer Service</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white">My Account</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Order Tracking</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Wishlist</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Terms & Conditions</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex items-start">
+              <i class="fas fa-map-marker-alt mt-1 mr-2"></i>
+              <span>bogor, City, Country</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-phone-alt mr-2"></i>
+              <span>+6283152903475</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-envelope mr-2"></i>
+              <span>info@nebulastore.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2023 Nebula Store. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Product Detail Modal -->
+  <div id="product-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6">
+        <div class="flex justify-between items-start mb-4">
+          <h3 id="modal-product-name" class="text-2xl font-bold text-gray-800"></h3>
+          <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="flex flex-col md:flex-row gap-6">
+          <div class="md:w-1/2">
+            <div id="modal-product-image" class="rounded-lg overflow-hidden mb-4 placeholder-img h-64">
+              <img src="" alt="" class="w-full h-full object-cover hidden">
+              <i class="fas fa-image text-4xl"></i>
+            </div>
+          </div>
+          
+          <div class="md:w-1/2">
+            <div class="flex items-center mb-4">
+              <div class="flex text-yellow-400 mr-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <span class="text-gray-600 text-sm">(24 reviews)</span>
+            </div>
+            
+            <p id="modal-product-price" class="text-2xl font-bold text-primary mb-4"></p>
+            
+            <p id="modal-product-description" class="text-gray-600 mb-6"></p>
+            
+            <div class="flex items-center space-x-4 mb-6">
+              <div class="flex items-center border border-gray-300 rounded-md">
+                <button type="button" onclick="this.nextElementSibling.stepDown()" class="px-3 py-1 text-gray-600 hover:bg-gray-100">-</button>
+                <input type="number" min="1" value="1" class="w-12 text-center border-0 focus:ring-0">
+                <button type="button" onclick="this.previousElementSibling.stepUp()" class="px-3 py-1 text-gray-600 hover:bg-gray-100">+</button>
+              </div>
+              <button class="bg-primary text-white px-6 py-2 rounded-md hover:bg-blue-600 transition mr-2">
+                Add to Cart
+              </button>
+              <button onclick="checkoutViaWhatsApp()" class="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition">
+                <i class="fab fa-whatsapp mr-2"></i>Checkout via WA
+              </button>
+              <button class="p-2 text-gray-600 hover:text-primary">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+            
+            <div class="border-t border-gray-200 pt-4">
+              <div class="flex items-center mb-2">
+                <span class="text-gray-600 w-24">Category:</span>
+                <span id="modal-product-category" class="font-medium"></span>
+              </div>
+              <div class="flex items-center">
+                <span class="text-gray-600 w-24">Availability:</span>
+                <span class="text-green-600 font-medium">In Stock</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Fetch popular products
+    fetch('https://fatimaazhr.psl17.my.id/api/products/popular/all')
+      .then(response => response.json())
+      .then(data => {
+        const popularProductsContainer = document.getElementById('popular-products');
+        
+        data.forEach(product => {
+          const productCard = `
+            <div class="swiper-slide w-64">
+              <div class="product-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
+                <div class="h-48 overflow-hidden relative placeholder-img">
+                  ${product.image ? 
+                    `<img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">` : 
+                    `<i class="fas fa-image text-4xl"></i>`}
+                  <div class="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-1 rounded">
+                    Popular
+                  </div>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-semibold text-gray-800 mb-1 truncate">${product.name}</h3>
+                  <div class="flex items-center mb-2">
+                    <div class="flex text-yellow-400 text-xs">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="text-gray-500 text-xs ml-1">(${Math.floor(Math.random() * 50)})</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-primary font-bold">$${product.price}</span>
+                    <button class="view-detail text-gray-500 hover:text-primary" data-id="${product.id}">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+          popularProductsContainer.innerHTML += productCard;
+        });
+        
+        // Initialize Swiper
+        new Swiper('.swiper-container', {
+          slidesPerView: 'auto',
+          spaceBetween: 20,
+          freeMode: true,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+        
+        // Add event listeners to view detail buttons
+        document.querySelectorAll('.view-detail').forEach(button => {
+          button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-id');
+            showProductDetail(productId);
+          });
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching popular products:', error);
+      });
+
+    // Fetch all products
+    fetch('https://fatimaazhr.psl17.my.id/api/products')
+      .then(response => response.json())
+      .then(data => {
+        const allProductsContainer = document.getElementById('all-products');
+        
+        data.forEach(product => {
+          const productCard = `
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
+              <div class="h-48 overflow-hidden relative placeholder-img">
+                ${product.image ? 
+                  `<img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">` : 
+                  `<i class="fas fa-image text-4xl"></i>`}
+              </div>
+              <div class="p-4">
+                <h3 class="font-semibold text-gray-800 mb-1 truncate">${product.name}</h3>
+                <div class="flex items-center mb-2">
+                  <div class="flex text-yellow-400 text-xs">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <span class="text-gray-500 text-xs ml-1">(${Math.floor(Math.random() * 50)})</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-primary font-bold">$${product.price}</span>
+                  <button class="view-detail text-gray-500 hover:text-primary" data-id="${product.id}">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                </div>
+              </div>
+            </div>`;
+          allProductsContainer.innerHTML += productCard;
+        });
+        
+        // Add event listeners to view detail buttons
+        document.querySelectorAll('.view-detail').forEach(button => {
+          button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-id');
+            showProductDetail(productId);
+          });
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching all products:', error);
+      });
+
+    // Show product detail modal
+    function showProductDetail(productId) {
+      // In a real app, we would fetch the product details from the API
+      // For this demo, we'll use the data we already have
+      
+      // Find the product in either popular or all products
+      let product = null;
+      
+      // Check popular products first
+      fetch('https://fatimaazhr.psl17.my.id/api/products/popular/all')
+        .then(response => response.json())
+        .then(popularProducts => {
+          product = popularProducts.find(p => p.id == productId);
+          
+          if (!product) {
+            // If not found in popular, check all products
+            fetch('https://fatimaazhr.psl17.my.id/api/products')
+              .then(response => response.json())
+              .then(allProducts => {
+                product = allProducts.find(p => p.id == productId);
+                displayProductDetail(product);
+              });
+          } else {
+            displayProductDetail(product);
+          }
+        });
+    }
+    
+    function displayProductDetail(product) {
+      if (!product) return;
+      
+      document.getElementById('modal-product-name').textContent = product.name;
+      document.getElementById('modal-product-price').textContent = `$${product.price}`;
+      document.getElementById('modal-product-description').textContent = product.description || 'No description available.';
+      document.getElementById('modal-product-category').textContent = product.category || 'General';
+      
+      const imageContainer = document.getElementById('modal-product-image');
+      const img = imageContainer.querySelector('img');
+      
+      if (product.image) {
+        img.src = product.image;
+        img.alt = product.name;
+        img.classList.remove('hidden');
+        imageContainer.querySelector('i').classList.add('hidden');
+      } else {
+        img.classList.add('hidden');
+        imageContainer.querySelector('i').classList.remove('hidden');
+      }
+      
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+    
+    // Close modal
+    document.getElementById('close-modal').addEventListener('click', function() {
+      document.getElementById('product-modal').classList.add('hidden');
+    });
+    
+    // Close modal when clicking outside
+    document.getElementById('product-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.add('hidden');
+      }
+    });
+
+    // WhatsApp Checkout Function
+    function checkoutViaWhatsApp() {
+      const productName = document.getElementById('modal-product-name').textContent;
+      const productPrice = document.getElementById('modal-product-price').textContent;
+      const quantity = document.querySelector('#product-modal input[type="number"]').value || 1;
+      
+      const message = `Halo, saya ingin memesan produk:
+      
+*${productName}*
+Harga: ${productPrice}
+Jumlah: ${quantity}
+
+Total: ${productPrice.replace('$','') * quantity}
+
+Mohon info cara pembayaran dan pengirimannya. Terima kasih!`;
+      
+      const whatsappUrl = `https://wa.me/6283152903475?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    }
+  </script>
+</body>
+</html>
