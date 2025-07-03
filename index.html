@@ -228,7 +228,8 @@
 
     async function loadProduk() {
       try {
-        const res = await fetch("https://crud-api-production-1baf.up.railway.app/api/products");
+        const res = await fetch("https://fatimaazhr.psl17.my.id/api/products");
+        const res = await fetch("https://fatimaazhr.psl17.my.id/api/products/popular/all");
         const result = await res.json(); // Pastikan pakai .json()
         const data = result.data;
 
